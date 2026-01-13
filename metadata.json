@@ -1,0 +1,7 @@
+{
+  "name": "LLM 數學原理簡析：從 y=ax+b 到智慧湧現",
+  "description": "一個互動式的網頁，透過 D3.js 視覺化線性擬合、非線性變換與「旋鈕機器」比喻，深入淺出地解釋大語言模型的數學底層與湧現現象。",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
