@@ -1,7 +1,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
-import { getGeminiResponse } from '../services/geminiService';
-import { ChatMessage } from '../types';
+import { getGeminiResponse } from '../services/geminiService.ts';
+import { ChatMessage } from '../types.ts';
 
 const GeminiChat: React.FC = () => {
   const [messages, setMessages] = useState<ChatMessage[]>([
@@ -31,13 +31,13 @@ const GeminiChat: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col h-full bg-slate-900 rounded-2xl border border-slate-800 shadow-xl overflow-hidden">
+    <div className="flex flex-col h-full bg-slate-900 rounded-2xl border border-slate-800 shadow-xl overflow-hidden min-h-[500px]">
       <div className="p-4 bg-slate-800 border-b border-slate-700 flex items-center gap-3">
         <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
         <h3 className="font-bold">數學大腦對話室</h3>
       </div>
 
-      <div ref={scrollRef} className="flex-1 overflow-y-auto p-4 space-y-4 custom-scrollbar">
+      <div ref={scrollRef} className="flex-1 overflow-y-auto p-4 space-y-4 custom-scrollbar bg-slate-900/50">
         {messages.map((m, i) => (
           <div key={i} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
             <div className={`max-w-[85%] p-3 rounded-2xl text-sm ${
@@ -62,7 +62,7 @@ const GeminiChat: React.FC = () => {
         )}
       </div>
 
-      <div className="p-4 border-t border-slate-800">
+      <div className="p-4 border-t border-slate-800 bg-slate-900">
         <div className="flex gap-2">
           <input 
             type="text" 
@@ -70,12 +70,12 @@ const GeminiChat: React.FC = () => {
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && handleSend()}
             placeholder="詢問數學原理..."
-            className="flex-1 bg-slate-950 border border-slate-700 rounded-xl px-4 py-2 text-sm focus:outline-none focus:border-blue-500 transition-colors"
+            className="flex-1 bg-slate-950 border border-slate-700 rounded-xl px-4 py-2 text-sm focus:outline-none focus:border-blue-500 transition-colors text-slate-200"
           />
           <button 
             onClick={handleSend}
             disabled={isLoading}
-            className="bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white p-2 rounded-xl transition-all"
+            className="bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white p-2 rounded-xl transition-all shadow-lg active:scale-95"
           >
             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
               <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" />

@@ -1,7 +1,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
-import { ActivationType } from '../types';
+import { ActivationType } from '../types.ts';
 
 interface Props {
   activation: ActivationType;
@@ -66,8 +66,8 @@ const LinearFitting: React.FC<Props> = ({ activation, weight, bias, onKnobChange
         y = Math.max(0, y);
       } else if (activation === ActivationType.GELU) {
         // Simple approximation
-        y = x * (1 / (1 + Math.exp(-1.702 * x)));
-        y = weight * y + bias;
+        const x_val = weight * x + bias;
+        y = x_val * (1 / (1 + Math.exp(-1.702 * x_val)));
       }
       return { x, y };
     });
@@ -91,7 +91,7 @@ const LinearFitting: React.FC<Props> = ({ activation, weight, bias, onKnobChange
       <svg ref={svgRef} className="w-full h-full rounded-xl bg-slate-900 shadow-inner" />
       <div className="absolute top-4 right-4 bg-slate-800/80 p-3 rounded-lg border border-slate-700 text-xs space-y-2">
         <div className="font-bold text-pink-400">目前公式:</div>
-        <div className="font-mono">
+        <div className="font-mono text-slate-300">
           {activation === ActivationType.LINEAR && `y = ${weight.toFixed(2)}x + ${bias.toFixed(2)}`}
           {activation === ActivationType.RELU && `y = ReLU(${weight.toFixed(2)}x + ${bias.toFixed(2)})`}
           {activation === ActivationType.GELU && `y = GeLU(${weight.toFixed(2)}x + ${bias.toFixed(2)})`}

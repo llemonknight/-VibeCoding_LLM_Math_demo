@@ -1,9 +1,9 @@
 
 import React, { useState } from 'react';
-import { ActivationType } from './types';
-import LinearFitting from './components/LinearFitting';
-import KnobMachine from './components/KnobMachine';
-import GeminiChat from './components/GeminiChat';
+import { ActivationType } from './types.ts';
+import LinearFitting from './components/LinearFitting.tsx';
+import KnobMachine from './components/KnobMachine.tsx';
+import GeminiChat from './components/GeminiChat.tsx';
 
 const App: React.FC = () => {
   const [activation, setActivation] = useState<ActivationType>(ActivationType.LINEAR);
@@ -40,13 +40,13 @@ const App: React.FC = () => {
             </p>
             
             <div className="space-y-4">
-              <label className="block text-sm font-medium text-slate-300">調整權重 (Weight - a)</label>
+              <label className="block text-sm font-medium text-slate-300">調整權重 (Weight - a): {weight.toFixed(1)}</label>
               <input 
                 type="range" min="-5" max="5" step="0.1" value={weight} 
                 onChange={(e) => setWeight(parseFloat(e.target.value))}
                 className="w-full accent-blue-500"
               />
-              <label className="block text-sm font-medium text-slate-300">調整偏置 (Bias - b)</label>
+              <label className="block text-sm font-medium text-slate-300">調整偏置 (Bias - b): {bias.toFixed(1)}</label>
               <input 
                 type="range" min="-5" max="5" step="0.1" value={bias} 
                 onChange={(e) => setBias(parseFloat(e.target.value))}
@@ -129,7 +129,7 @@ const App: React.FC = () => {
               </ul>
             </div>
           </div>
-          <div className="h-[600px] lg:h-auto">
+          <div className="h-[600px] lg:min-h-full">
             <GeminiChat />
           </div>
         </section>
